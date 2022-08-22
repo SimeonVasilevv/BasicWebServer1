@@ -6,8 +6,8 @@
         {
             StatusCode = statusCode;
 
-            Headers.Add("Server", "My Web Server");
-            Headers.Add("Date", $"{DateTime.UtcNow:r}");
+            Headers.Add(Header.Server, "My Web Server");
+            Headers.Add(Header.Date, $"{DateTime.UtcNow:r}");
         }
 
         public StatusCode StatusCode { get; set; }
