@@ -10,11 +10,7 @@ namespace BasicWebServer1.Server.HTTP
 
         public int Count => headers.Count;
 
-        public void Add(string name, string value)
-        {
-            var header = new Header(name, value);
-            headers.Add(name, header);
-        }
+        public void Add(string name, string value) => this.headers[name] = new Header(name, value);
 
         public IEnumerator<Header> GetEnumerator() => headers.Values.GetEnumerator();
 

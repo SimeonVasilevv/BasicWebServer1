@@ -5,7 +5,7 @@ namespace BasicWebServer1.Server.HTTP
     public class Header
     {
         public const string ContentType = "Content-Type";
-        public const string CintentLength = "Content-Length";
+        public const string ContentLength = "Content-Length";
         public const string Date = "Date";
         public const string Location = "Location";
         public const string Server = "Server";
@@ -21,5 +21,6 @@ namespace BasicWebServer1.Server.HTTP
         public string Name { get; init; }
         public string Value { get; set; }
 
+        public override string ToString() => $"{this.Name}: {this.Value}";
     }
 }
