@@ -1,4 +1,5 @@
 ﻿using BasicWebServer1.Server;
+using BasicWebServer1.Server.HTTP;
 using BasicWebServer1.Server.Responses;
 
 public class StartUp
@@ -14,6 +15,17 @@ public class StartUp
         .MapGet("/", new TextResponse("Hello from the server!"))
         .MapGet("/HTML", new HtmlResponse(StartUp.HtmlForm))
         .MapGet("/Redirect", new RedirectResponse("https://softuni.bg"))
-        .MapPost("/HTML", new TextResponse("")))
+        .MapPost("/HTML", new TextResponse("",StartUp.AddFormDataAction)))
         .Start();
+
+    private static void AddFormDataAction (Request request, Response response)
+    {
+        response.Body = "";
+        
+        foreach (var (key,value) in request.Form)
+        {
+            response.Body += $"{key} - {value}";
+            response.Body += Environment.NewLine;
+        }
+    }
 }

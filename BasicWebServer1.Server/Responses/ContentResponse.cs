@@ -6,7 +6,8 @@ namespace BasicWebServer1.Server.Responses
 {
     public class ContentResponse : Response
     {
-        public ContentResponse(string content, string contentType) 
+        public ContentResponse(string content, string contentType,
+            Action<Request,Response> preRenderAction = null) 
             : base(StatusCode.OK)
         {
             Guard.AgainstNull(content);
@@ -14,6 +15,7 @@ namespace BasicWebServer1.Server.Responses
 
             this.Headers.Add(Header.ContentType, contentType);
             this.Body = content;
+            this.PreRenderAction = preRenderAction;
         }
 
         public override string ToString()

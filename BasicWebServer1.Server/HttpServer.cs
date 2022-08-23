@@ -44,13 +44,17 @@ namespace BasicWebServer1.Server
 
                 var networkStream = connection.GetStream();
 
-                var requestText = ReadRequest(networkStream);
+                var requestText = this.ReadRequest(networkStream);
 
                 Console.WriteLine(requestText);
 
                 var request = Request.Parse(requestText);
                 var response = this.routingTable.MatchRequest(request);
 
+                if (response.PreRenderAction != null)
+                {
+                    response.PreRenderAction(request, response);
+                }
                 WriteResponse(networkStream,response);
 
                 connection.Close();
